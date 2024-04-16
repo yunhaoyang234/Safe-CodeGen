@@ -1,0 +1,1 @@
+-- specification  G ( F (!pedestrian_observed & !car_observed) ->  F !(Action = stop))  is true

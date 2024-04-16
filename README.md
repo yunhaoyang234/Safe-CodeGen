@@ -2,7 +2,7 @@
 A framework that automatically verifies python functions against given temporal logic specifications. This framework is designed to verify Python-based controllers for autonomous systems. A model that captures all possible system behaviors is required.
 
 ## Setup
-Requirement: Python 3.11
+Requirement: Python 3.9 or before
 
 ## Instructions
 1. Copy the python function to a local directory `path_to_python_code`.
