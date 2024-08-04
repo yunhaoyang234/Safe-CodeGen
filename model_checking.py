@@ -1,4 +1,5 @@
 import os
+import time
 
 def python2NuSMV(model_path, actions, conditions, envs):
     # actions: [stop, VP], conditions: [conditions for stop, conditions for VP]
@@ -46,4 +47,7 @@ def verification(spec_path, spec_names):
     f = open('NuSMV/temp/script.csh', 'x')
     f.write(command)
     f.close()
+    start = time.time()
     os.system('NuSMV/bin/NuSMV -source NuSMV/temp/script.csh')
+    end = time.time()
+    print(end - start)
