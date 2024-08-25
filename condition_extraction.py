@@ -7,11 +7,22 @@ def process_code(tree, layer):
         processed += process_code(t, layer)
     return processed
 
+def match_proposition(tree_node, words, correspondance):
+    # determine which proposition a function is matched to
+    t = tree_node[1]
+    for w in words:
+        if correspondance(t, w):
+            return tree_node
+    return None
+
 def extract_words(tree, words):
+    def correspondance(a, b):
+        return a == b
     extracted = []
     for t in tree:
-        if t[1] in words:
-            extracted.append(t)
+        matched = match_proposition(t, words, correspondance)
+        if matched != None:
+            extracted.append(matched)
     return extracted
 
 def prev_layer_cond(words, action_idx):
