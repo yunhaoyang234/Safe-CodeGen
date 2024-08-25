@@ -1,0 +1,19 @@
+-- specification  G (stop_sign_observed ->  F Action = sleep)  is false
+-- as demonstrated by the following execution sequence
+Trace Description: LTL Counterexample 
+Trace Type: Counterexample 
+  -> State: 1.1 <-
+    pedestrian_observed = FALSE
+    car_observed = FALSE
+    stop_sign_observed = FALSE
+    within_speed_limit = FALSE
+    Action = sleep
+  -> State: 1.2 <-
+    within_speed_limit = TRUE
+  -> State: 1.3 <-
+    stop_sign_observed = TRUE
+    Action = velocity_publisher
+  -- Loop starts here
+  -> State: 1.4 <-
+    stop_sign_observed = FALSE
+  -> State: 1.5 <-

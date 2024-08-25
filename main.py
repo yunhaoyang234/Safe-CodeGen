@@ -61,7 +61,7 @@ def main(args):
     for act in acts:
         conditions.append(extract_conditions(act, processed))
     python2NuSMV(model_path, acts, conditions, envs)
-    spec_names = ['spec1', 'spec3']
+    spec_names = ['spec1', 'spec2', 'spec3', 'spec4']
     verification(spec_path, spec_names)
 
 if __name__ == '__main__':

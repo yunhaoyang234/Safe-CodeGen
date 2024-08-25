@@ -4,7 +4,8 @@ VAR
   pedestrian_observed : boolean;
   car_observed : boolean;
   stop_sign_observed: boolean;
-  Action : {stop, velocity_publisher};
+  within_speed_limit: boolean;
+  Action : {sleep, velocity_publisher};
 
 ASSIGN
   init(car_observed) := FALSE;
@@ -25,8 +26,14 @@ ASSIGN
       TRUE: {TRUE, FALSE};
     esac;
 
+  init(within_speed_limit) := FALSE;
+  next(within_speed_limit) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
   next(Action) :=
     case
-      (pedestrian_observed) & (TRUE) : stop;
-      (TRUE) : velocity_publisher;
+      (pedestrian_observed) & (TRUE) | (! (within_speed_limit)) & (TRUE) : sleep;
+      (within_speed_limit) & (TRUE) : velocity_publisher;
     esac;

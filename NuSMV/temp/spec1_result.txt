@@ -1,16 +1,1 @@
--- specification  G (Action = stop & pedestrian_observed)  is false
--- as demonstrated by the following execution sequence
-Trace Description: LTL Counterexample 
-Trace Type: Counterexample 
-  -- Loop starts here
-  -> State: 1.1 <-
-    pedestrian_observed = FALSE
-    car_observed = FALSE
-    stop_sign_observed = FALSE
-    Action = stop
-  -> State: 1.2 <-
-    pedestrian_observed = TRUE
-    Action = velocity_publisher
-  -> State: 1.3 <-
-    pedestrian_observed = FALSE
-    Action = stop
+-- specification  G (pedestrian_observed ->  X Action = sleep)  is true

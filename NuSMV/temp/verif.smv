@@ -4,7 +4,8 @@ VAR
   pedestrian_observed : boolean;
   car_observed : boolean;
   stop_sign_observed: boolean;
-  Action : {stop, velocity_publisher};
+  within_speed_limit: boolean;
+  Action : {sleep, velocity_publisher};
 
 ASSIGN
   init(car_observed) := FALSE;
@@ -25,15 +26,23 @@ ASSIGN
       TRUE: {TRUE, FALSE};
     esac;
 
+  init(within_speed_limit) := FALSE;
+  next(within_speed_limit) :=
+    case
+      TRUE: {TRUE, FALSE};
+    esac;
+
   next(Action) :=
     case
-      (pedestrian_observed) & (TRUE) : stop;
-      (TRUE) : velocity_publisher;
+      (pedestrian_observed) & (TRUE) | (! (within_speed_limit)) & (TRUE) : sleep;
+      (within_speed_limit) & (TRUE) : velocity_publisher;
     esac;
 
 
-LTLSPEC NAME spec1 := G (Action=stop &  pedestrian_observed)
+LTLSPEC NAME spec1 := G (pedestrian_observed -> X Action=sleep)
 
-LTLSPEC NAME spec2 := G (stop_sign_observed -> F(Action = stop));
+LTLSPEC NAME spec2 := G (stop_sign_observed -> F(Action=sleep));
 
-LTLSPEC NAME spec3 := G (F(! pedestrian_observed & ! car_observed) -> F ! (Action=stop) )
+LTLSPEC NAME spec3 := G (F(! pedestrian_observed & ! car_observed) -> F ! (Action=sleep) )
+
+LTLSPEC NAME spec4 := G (! within_speed_limit -> X Action=sleep)

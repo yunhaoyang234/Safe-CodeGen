@@ -36,9 +36,9 @@ def prev_layer_cond(words, action_idx):
             idx -= 1
             cond = []
             if words[idx][1] == 'else':
-                start = 0
+                start = idx
                 while words[start][1] != 'if':
-                    start += 1
+                    start -= 1
                 if_idx = start
                 while start < idx:
                     while words[start][1] not in ['if', 'elif', 'else']:

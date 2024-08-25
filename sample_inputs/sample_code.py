@@ -10,6 +10,9 @@ def turn_right_30_degree():
     while (time.time() - start_time) < period + stopping_time:
         time_at = time.time()
         while pedestrian_observed():
-            stop() # Stop the vehicle if a pedestrian is observed
+            sleep(0.5) # Stop the vehicle if a pedestrian is observed
         stopping_time += time.time() - time_at # Accumulate stopping time
-        velocity_publisher(linear, angular) # Publish the velocity commands
+        if within_speed_limit(linear, angular):
+            velocity_publisher(linear, angular) # Publish the velocity commands
+        else:
+            sleep(0.5)

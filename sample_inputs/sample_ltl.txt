@@ -1,5 +1,7 @@
-LTLSPEC NAME spec1 := G (Action=stop &  pedestrian_observed)
+LTLSPEC NAME spec1 := G (pedestrian_observed -> X Action=sleep)
 
-LTLSPEC NAME spec2 := G (stop_sign_observed -> F(Action = stop));
+LTLSPEC NAME spec2 := G (stop_sign_observed -> F(Action=sleep));
 
-LTLSPEC NAME spec3 := G (F(! pedestrian_observed & ! car_observed) -> F ! (Action=stop) )
+LTLSPEC NAME spec3 := G (F(! pedestrian_observed & ! car_observed) -> F ! (Action=sleep) )
+
+LTLSPEC NAME spec4 := G (! within_speed_limit -> X Action=sleep)
