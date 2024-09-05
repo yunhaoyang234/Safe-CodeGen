@@ -1,0 +1,9 @@
+Given the following APIs: 
+"""
+velocity_publisher(linear, angular): returns nothing. Publishes one linear and angular velocity command to the robot. 
+stop(): returns nothing. Stops the robot. 
+math.pi: returns the value of pi (float).
+time.time(): returns the elapsed seconds since the epoch.
+pedestrian_observed(): returns a boolean value indicating whether a pedestrian is observed.
+"""
+Write a Python function called "turn_right_45_degrees" that controls a car through a complete 45-degree right turn while stopping for pedestrians. The turn radius is 3 meters. The rotation period is 5 seconds.
