@@ -1,1 +1,1 @@
--- specification  G (pedestrian_observed ->  X Action = sleep)  is true
+-- specification  G (person_observed ->  X Action = stop)  is true

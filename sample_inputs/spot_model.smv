@@ -16,9 +16,3 @@ ASSIGN
     case
       TRUE : {TRUE, FALSE};
     esac;
-  next(Action) :=
-    case
-      (TRUE) & (! (person_observed)) & (! (target_observed)) : navigate;
-      (TRUE) & (target_observed) | (person_observed) & (TRUE) : stop;
-      (TRUE) & (target_observed) : signal;
-    esac;

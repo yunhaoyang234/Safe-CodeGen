@@ -1,48 +1,33 @@
-
 MODULE main
 VAR
-  pedestrian_observed : boolean;
-  car_observed : boolean;
-  stop_sign_observed: boolean;
-  within_speed_limit: boolean;
-  Action : {sleep, velocity_publisher};
+  person_observed : boolean;
+  target_observed : boolean;
+  Action : {navigate, stop, signal};
 
 ASSIGN
-  init(car_observed) := FALSE;
-  next(car_observed) :=
+  init(person_observed) := FALSE;
+  next(person_observed) :=
     case
       TRUE: {TRUE, FALSE};
     esac;
 
-  init(pedestrian_observed) := FALSE;
-  next(pedestrian_observed) :=
+  init(target_observed) := FALSE;
+  next(target_observed) :=
     case
       TRUE : {TRUE, FALSE};
     esac;
-
-  init(stop_sign_observed) := FALSE;
-  next(stop_sign_observed) :=
-    case
-      TRUE: {TRUE, FALSE};
-    esac;
-
-  init(within_speed_limit) := FALSE;
-  next(within_speed_limit) :=
-    case
-      TRUE: {TRUE, FALSE};
-    esac;
-
   next(Action) :=
     case
-      (pedestrian_observed) & (TRUE) | (! (within_speed_limit)) & (TRUE) : sleep;
-      (within_speed_limit) & (TRUE) : velocity_publisher;
+      (TRUE) & (! (person_observed)) & (! (target_observed)) : navigate;
+      (TRUE) & (target_observed) | (person_observed) & (TRUE) : stop;
+      (TRUE) & (target_observed) : signal;
     esac;
 
 
-LTLSPEC NAME spec1 := G (pedestrian_observed -> X Action=sleep)
+LTLSPEC NAME spec1 := G (person_observed -> X Action=stop)
 
-LTLSPEC NAME spec2 := G (stop_sign_observed -> F(Action=sleep));
+LTLSPEC NAME spec2 := G (target_observed & ! person_observed -> F ! (Action=navigate));
 
-LTLSPEC NAME spec3 := G (F(! pedestrian_observed & ! car_observed) -> F ! (Action=sleep) )
+LTLSPEC NAME spec3 := G (! target_observed -> !(X Action=signal))
 
-LTLSPEC NAME spec4 := G (! within_speed_limit -> X Action=sleep)
+LTLSPEC NAME spec4 := G (Action=stop | Action=signal | Action=navigate)

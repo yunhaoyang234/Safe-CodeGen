@@ -1,1 +1,1 @@
--- specification  G (!within_speed_limit ->  X Action = sleep)  is true
+-- specification  G ((Action = stop | Action = signal) | Action = navigate)  is true

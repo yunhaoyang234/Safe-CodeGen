@@ -1,12 +1,1 @@
--- specification  G ( F (!pedestrian_observed & !car_observed) ->  F !(Action = sleep))  is false
--- as demonstrated by the following execution sequence
-Trace Description: LTL Counterexample 
-Trace Type: Counterexample 
-  -- Loop starts here
-  -> State: 2.1 <-
-    pedestrian_observed = FALSE
-    car_observed = FALSE
-    stop_sign_observed = FALSE
-    within_speed_limit = FALSE
-    Action = sleep
-  -> State: 2.2 <-
+-- specification  G (!target_observed -> !( X Action = signal))  is true

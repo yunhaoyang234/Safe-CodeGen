@@ -1,0 +1,7 @@
+LTLSPEC NAME spec1 := G (person_observed -> X Action=stop)
+
+LTLSPEC NAME spec2 := G (target_observed & ! person_observed -> F ! (Action=navigate));
+
+LTLSPEC NAME spec3 := G (! target_observed -> !(X Action=signal))
+
+LTLSPEC NAME spec4 := G (Action=stop | Action=signal | Action=navigate)
